@@ -30,5 +30,13 @@ class GroupController < ApplicationController
             redirect to '/groups/new'
         end
     end
-    
+
+    get '/groups/:slug' do
+        @group = Group.find_by_slug(params[:slug])
+        @user = current_user
+
+        erb :'groups/view'
+    end
+
+
 end
