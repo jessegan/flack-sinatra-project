@@ -19,5 +19,9 @@ class GroupController < ApplicationController
             erb :'groups/new'
         end
     end
+
+    post '/groups' do
+        
+    end
     
 end
