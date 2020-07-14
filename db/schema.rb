@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20200714145440) do
     t.datetime "updated_at"
   end
 
-  create_table "groups_users", id: false, force: :cascade do |t|
+  create_table "members", id: false, force: :cascade do |t|
     t.integer "user_id",  null: false
     t.integer "group_id", null: false
   end
