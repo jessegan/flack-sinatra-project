@@ -22,8 +22,9 @@ class GroupController < ApplicationController
 
     post '/groups' do
         group = Group.new(params)
-        group.users << current_user
         if group.save
+            group.users << current_user
+
             redirect to '/groups'
         else
             redirect to '/groups/new'
