@@ -1,14 +1,13 @@
 module Slugifiable
     module InstanceMethods
         def slug
-            def slug()
-                subs = {
-                    ',' => '',
-                    "'" => '',
-                    ' ' => '-',
-                    '.' => ''
-                }
-                self.name.downcase.gsub(/\W/,subs)
+            subs = {
+                ',' => '',
+                "'" => '',
+                ' ' => '-',
+                '.' => ''
+            }
+            self.name.downcase.gsub(/\W/,subs)
         end
     end
 
