@@ -8,7 +8,11 @@
 
 <!-- List Groups for current user -->
 <%@user.groups.each do |g|%>
-    <h3><%=g.display_name%></h3>
+    <a href='/groups/<%=g.slug%>'>
+    <div>
+        <h3><%=g.display_name%></h3>
+    </div>
+    </a>
 <%end%>
 
 <!-- Logout button -->
