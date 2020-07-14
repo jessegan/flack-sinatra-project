@@ -11,18 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200714174908) do
+ActiveRecord::Schema.define(version: 20200714142225) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.string   "display_name"
+    t.boolean  "public?",      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "members", id: false, force: :cascade do |t|
-    t.integer "user_id",  null: false
-    t.integer "group_id", null: false
   end
 
   create_table "users", force: :cascade do |t|

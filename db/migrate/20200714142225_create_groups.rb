@@ -3,7 +3,7 @@ class CreateGroups < ActiveRecord::Migration
     create_table :groups do |t|
       t.string :name
       t.string :display_name
-      t.boolean :public?
+      t.boolean :public?, default: 0
       
       t.timestamps
     end
