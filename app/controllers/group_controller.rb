@@ -21,7 +21,14 @@ class GroupController < ApplicationController
     end
 
     post '/groups' do
-        
+        binding.pry
+        group = Group.new(params)
+        group.users << current_user
+        if group.save
+            redirect to '/groups'
+        else
+            redirect to '/groups/new'
+        end
     end
     
 end
