@@ -21,7 +21,6 @@ class GroupController < ApplicationController
     end
 
     post '/groups' do
-        binding.pry
         group = Group.new(params)
         group.users << current_user
         if group.save
