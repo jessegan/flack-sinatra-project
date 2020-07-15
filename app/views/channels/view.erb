@@ -1,1 +1,18 @@
 <h1><%=@group.display_name%> / #<%=@channel.name%></h1>
+<h2></h2>
+
+<%@channel.messages.each do |m|%>
+    <h4><%=m.user.name%></h4>
+    <p><%=m.contents%></p>
+    <br>
+<%end%>
+
+<form method='POST' action='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>
+    <input type='hidden' name='message[channel_id]' value='<%=@channel.id%>'>
+    <input type='hidden' name='message[user_id]' value='<%=@user.id%>'>
+    
+    <textarea name='message[contents]' placeholder='Type your message here'></textarea>
+    <br>
+    <input type='submit' value='Send'>
+
+</form>
