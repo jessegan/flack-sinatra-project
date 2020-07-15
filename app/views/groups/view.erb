@@ -1,10 +1,6 @@
 <h1><%=@group.display_name%></h1>
 
-<h2>Members</h2>
 <a href='/groups/<%=@group.slug%>/members'><button>Edit Members</button></a>
+<a href='/groups/<%=@group.slug%>/edit'><button>Edit Group</button></a>
 
-<!--
-<%@group.users.each do |member|%>
-    <p><%=member.name%></p>
-<%end%>
--->
+<h2>Channels</h2>

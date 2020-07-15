@@ -1,0 +1,10 @@
+<h1>Edit Group Details</h1>
+
+<form method='POST' action='/groups/<%=@group.slug%>'>
+<input type='hidden' id='hidden' name='_method' value='PATCH'>
+
+Name <input type='text' name='group[name]' value='<%=@group.name%>'>
+Display Name <input type='text' name='group[display_name]' value='<%=@group.display_name%>'>
+
+<input type='submit' value='Save'>
+</form>

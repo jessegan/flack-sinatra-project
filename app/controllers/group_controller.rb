@@ -45,13 +45,18 @@ class GroupController < ApplicationController
         erb :'groups/members'
     end
 
+    get '/groups/:slug/edit' do
+        @group = Group.find_by_slug(params[:slug])
+
+        erb :'groups/edit'
+    end
+
     patch '/groups/:slug' do
         group = Group.find_by_slug(params[:slug])
 
         group.update(params[:group])
-        group.save
         
-        redirect to "/groups/#{group.slug}/members"
+        redirect to "/groups/#{group.slug}"
     end
 
 
