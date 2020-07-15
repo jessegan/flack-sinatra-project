@@ -59,5 +59,4 @@ class GroupController < ApplicationController
         redirect to "/groups/#{group.slug}"
     end
 
-
 end
