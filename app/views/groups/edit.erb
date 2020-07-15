@@ -1,3 +1,5 @@
+<a href='/groups/<%=@group.slug%>'>Back to channels</a>
+
 <h1>Edit Group Details</h1>
 
 <form method='POST' action='/groups/<%=@group.slug%>'>
@@ -8,6 +10,7 @@ Display Name <input type='text' name='group[display_name]' value='<%=@group.disp
 
 <input type='submit' value='Save'>
 </form>
+<br>
 
 <h2></h2>
 <form method='POST' action='/groups/<%=@group.slug%>'>
