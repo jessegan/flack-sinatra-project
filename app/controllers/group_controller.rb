@@ -59,4 +59,9 @@ class GroupController < ApplicationController
         redirect to "/groups/#{group.slug}"
     end
 
+    delete '/groups/:slug' do
+        group = Group.find_by_slug(params[:slug])
+        
+    end
+
 end

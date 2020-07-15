@@ -8,3 +8,9 @@ Display Name <input type='text' name='group[display_name]' value='<%=@group.disp
 
 <input type='submit' value='Save'>
 </form>
+
+<h2></h2>
+<form method='POST' action='/groups/<%=@group.slug%>'>
+<input type='hidden' id='hidden' name='_method' value='DELETE'>
+<input type='submit' value='Delete Group'>
+</form>
