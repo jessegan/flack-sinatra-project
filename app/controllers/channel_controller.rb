@@ -47,9 +47,12 @@ class ChannelController < ApplicationController
         group = Group.find_by_slug(params[:slug])
         channel = Channel.find_by_slug(params[:channel_slug])
 
-        channel.update(params[:channel])
-
-        redirect to "/groups/#{group.slug}/c/#{channel.slug}"
+        if channel.update(params[:channel])
+            redirect to "/groups/#{group.slug}/c/#{channel.slug}"
+        else
+            channel = Channel.find_by_slug(params[:channel_slug])
+            redirect to "/groups/#{group.slug}/c/#{channel.slug}/edit"
+        end        
     end
 
 end
