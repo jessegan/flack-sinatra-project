@@ -55,4 +55,12 @@ class ChannelController < ApplicationController
         end        
     end
 
+    delete '/groups/:slug/c/:channel_slug' do
+        group = Group.find_by_slug(params[:slug])
+        channel = Channel.find_by_slug(params[:channel_slug])
+        channel.destroy
+
+        redirect to "/groups/#{group.slug}"
+    end
+
 end

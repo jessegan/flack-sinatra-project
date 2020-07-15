@@ -1,7 +1,9 @@
+<a href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>Back to #<%=@channel.name%></a>
 <h1>Edit #<%=@channel.name%></h1>
 
 <h2></h2>
 
+<!-- Edit Channel Name -->
 <form method='POST' action='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>
 <input type='hidden' id='hidden' name='_method' value='PATCH'>
 
@@ -9,4 +11,12 @@
 
 <input type='submit' value='Save'>
 
+</form>
+<br>
+
+<!-- Delete Channel -->
+<h2></h2>
+<form method='POST' action='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>
+    <input type='hidden' id='hidden' name='_method' value='DELETE'>
+    <input type='submit' value='Delete Channel'>
 </form>
