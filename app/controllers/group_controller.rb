@@ -38,5 +38,21 @@ class GroupController < ApplicationController
         erb :'groups/view'
     end
 
+    get '/groups/:slug/members' do
+        @group = Group.find_by_slug(params[:slug])
+        @other_users = User.all.reject {|user| @group.users.include?(user)}
+
+        erb :'groups/members'
+    end
+
+    patch '/groups/:slug' do
+        group = Group.find_by_slug(params[:slug])
+
+        group.update(params[:group])
+        group.save
+        
+        redirect to "/groups/#{group.slug}/members"
+    end
+
 
 end

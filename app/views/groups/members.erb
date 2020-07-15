@@ -1,0 +1,19 @@
+<h1>Edit Members</h1>
+<form method='POST' action='/groups/<%=@group.slug%>'>
+<input type='hidden' id='hidden' name='_method' value='PATCH'>
+<!-- List current members in a form to remove -->
+<h3>Current Members</h3>
+<%@group.users.each do |user|%>
+    <%=user.name%> <input type='checkbox' name='group[user_ids][]' value='<%=user.id%>' checked>
+    <br>
+<%end%>
+
+<!-- List all other members to add (only ones not already in group) -->
+<h3>Add Other Users</h3>
+<%@other_users.each do |user|%>
+    <%=user.name%> <input type='checkbox' name='group[user_ids][]' value='<%=user.id%>'>
+    <br>
+<%end%>
+
+<input type='submit' value='Save'>
+</form>
