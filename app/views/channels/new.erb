@@ -1,1 +1,12 @@
 <h1>Create a new Channel</h1>
+
+<h2></h2>
+
+<form method='POST' action='/groups/<%=@group.slug%>/c'>
+<input type='hidden' name='channel[group_id]' value='<%=@group.id%>'>
+
+<input type='text' name='channel[name]' placeholder='Channel Name'>
+<br><br>
+<input type='submit' value='Create Channel'>
+
+</form>

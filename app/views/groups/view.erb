@@ -5,6 +5,11 @@
 <a href='/groups/<%=@group.slug%>/edit'><button>Edit Group</button></a>
 
 <h2>Channels</h2>
+
+<!-- Button to create a new channel -->
+<a href='/groups/<%=@group.slug%>/c/new'><button>+ Create Channel</button></a>
+<br><br>
+
 <%@group.channels.each do |channel|%>
     <a href='/groups/<%=@group.slug%>/c/<%=channel.slug%>'><h4>#<%=channel.name%></h4></a>
 <%end%>
