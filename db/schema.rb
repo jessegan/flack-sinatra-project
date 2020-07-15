@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200715164223) do
+ActiveRecord::Schema.define(version: 20200715175253) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20200715164223) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "channels", ["name", "group_id"], name: "index_channels_on_name_and_group_id", unique: true
 
   create_table "group_users", force: :cascade do |t|
     t.integer  "group_id"
