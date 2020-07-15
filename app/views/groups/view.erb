@@ -4,3 +4,10 @@
 <a href='/groups/<%=@group.slug%>/edit'><button>Edit Group</button></a>
 
 <h2>Channels</h2>
+<%@group.channels.each do |channel|%>
+    <h4>#<%=channel.name%></h4>
+<%end%>
+
+<!-- Logout button -->
+<h2><br></h2>
+<a href='/logout'>Logout</a>
