@@ -1,0 +1,12 @@
+<h1>Edit #<%=@channel.name%></h1>
+
+<h2></h2>
+
+<form method='POST' action='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>
+<input type='hidden' id='hidden' name='_method' value='PATCH'>
+
+<input type='text' name='channel[name]' value='<%=@channel.name%>'>
+
+<input type='submit' value='Save'>
+
+</form>
