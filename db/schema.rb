@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200715175253) do
+ActiveRecord::Schema.define(version: 20200715185054) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 20200715175253) do
     t.string   "name"
     t.string   "display_name"
     t.boolean  "public?",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "channel_id", null: false
+    t.integer  "user_id",    null: false
+    t.text     "contents",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

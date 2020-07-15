@@ -3,6 +3,7 @@ class Channel < ActiveRecord::Base
     include Slugifiable::InstanceMethods
 
     belongs_to :group
+    has_many :messages
 
     before_validation :lowercase_name_before_validation
 
