@@ -1,0 +1,14 @@
+<h1><%=@user.name%></h1>
+
+<!-- Link to edit profile -->
+<a href='/profile/edit'><button>Edit Profile</button></a>
+<br><br>
+<h2></h2>
+
+<!-- # of groups -->
+<h3>Groups Joined</h3>
+<h4><%=@group_count%></h4>
+
+<!-- Link to most active channel -->
+<h3>Most Active Channel</h3>
+<h4><a href='/groups/<%=@most_active.group.slug%>/c/<%=@most_active.slug%>'><%=@most_active.group.display_name%> / #<%=@most_active.name%></a></h4>

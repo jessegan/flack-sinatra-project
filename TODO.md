@@ -3,6 +3,7 @@ Major Features:
 - Public/Private Groups and Channels
 - Group invites and requests
 - View and edit User profile
+- Leaving groups
 
 Updates:
 - Add back buttons on each page
