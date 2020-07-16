@@ -28,6 +28,16 @@ class UserController < ApplicationController
         end
     end
 
+    get '/profile/edit' do
+        if logged_in?
+            @user = current_user
+
+            erb :'users/edit'
+        else
+            redirect to "/login"
+        end
+    end
+
     post '/signup' do
         user = User.new(params)
         if user && user.save
