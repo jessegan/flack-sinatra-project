@@ -34,6 +34,7 @@ class GroupController < ApplicationController
     get '/groups/:slug' do
         @group = Group.find_by_slug(params[:slug])
         @user = current_user
+        @is_admin = @group.group_users.find_by(user: @user).admin
 
         erb :'groups/view'
     end
