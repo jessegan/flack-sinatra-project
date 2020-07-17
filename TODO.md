@@ -2,8 +2,8 @@ Major Features:
 - User Admin Roles in groups
 - Public/Private Groups and Channels
 - Group invites and requests
-- View and Edit User profile
 - Leaving groups
+- Flash messaging when creating/editing fails
 
 Updates:
 - Add back buttons on each page
@@ -13,3 +13,6 @@ Updates:
 
 
 DONE 7/16:
+- Add postgres
+- Connect to Heroku
+- View and Edit User profile

@@ -59,6 +59,15 @@ class UserController < ApplicationController
         end
     end
 
+    patch '/profile' do
+        user = current_user
+        if user.update(params[:user])
+            redirect to '/profile'
+        else 
+            redirect to '/profile/edit'
+        end
+    end
+
     get '/logout' do
         if logged_in?
             session.clear
