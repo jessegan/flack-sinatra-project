@@ -46,7 +46,9 @@ class GroupController < ApplicationController
     end
 
     get '/groups/:slug/edit' do
+        @user = current_user
         @group = Group.find_by_slug(params[:slug])
+        @members = @group.group_users.reject{|m| m.user==@user}.sort_by {|m| m.user.name}
 
         erb :'groups/edit'
     end

@@ -8,6 +8,14 @@
 Name <input type='text' name='group[name]' value='<%=@group.name%>'>
 Display Name <input type='text' name='group[display_name]' value='<%=@group.display_name%>'>
 
+<br><br>
+<!-- Set Admins -->
+<h3>Edit Admins</h3>
+<%@members.each do |member|%>
+    <p><%=member.user.name%> <input type='checkbox' name='admins[]' value='<%=member.id%>' <%=checked if member.admin==true%>></p>
+<%end%>
+
+<!-- Save Button -->
 <input type='submit' value='Save'>
 </form>
 <br>
