@@ -1,5 +1,7 @@
 Major Features:
 - User Admin Roles in groups
+    - Admins can make other admins
+    - 
 - Public/Private Groups and Channels
 - Group invites and requests
 - Leaving groups
@@ -10,6 +12,7 @@ Updates:
 - Add button to view public groups on group index page
 - Add form validations on every form page (login,signup,create/edit forms)
 - Protect views for Users without access or not logged in
+- Order groups and channels by name
 
 
 DONE 7/16:

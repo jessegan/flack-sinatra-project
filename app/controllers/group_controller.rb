@@ -23,7 +23,7 @@ class GroupController < ApplicationController
     post '/groups' do
         group = Group.new(params)
         if group.save
-            group.users << current_user
+            GroupUser.create(group: group, user: current_user, admin: 1)
 
             redirect to '/groups'
         else
@@ -55,7 +55,7 @@ class GroupController < ApplicationController
         group = Group.find_by_slug(params[:slug])
 
         group.update(params[:group])
-        
+
         redirect to "/groups/#{group.slug}"
     end
 
