@@ -5,9 +5,15 @@
 <input type='hidden' id='hidden' name='_method' value='PATCH'>
 <!-- List current members in a form to remove -->
 <h3>Current Members</h3>
-<%@group.users.each do |user|%>
-    <%=user.name%> <input type='checkbox' name='group[user_ids][]' value='<%=user.id%>' checked>
-    <br>
+<%@group.group_users.each do |member|%>
+    <p>
+    <%=member.user.name%> 
+    <%if member.admin%>
+        (Admin)<input type='hidden' name='group[user_ids][]' value='<%=member.user.id%>'>
+    <%else%>
+        <input type='checkbox' name='group[user_ids][]' value='<%=member.user.id%>' checked>
+    <%end%>
+    </p>
 <%end%>
 
 <!-- List all other members to add (only ones not already in group) -->

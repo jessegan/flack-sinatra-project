@@ -2,7 +2,6 @@ Major Features:
 - User Admin Roles in groups
     - Admins can make other admins
     - Group creators get set automatically as admin
-    - Admins can set other admins
     - Admins are only ones to see edit group
     - Admins cannot be removed from group
 - Public/Private Groups and Channels
