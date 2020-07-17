@@ -12,7 +12,7 @@ Display Name <input type='text' name='group[display_name]' value='<%=@group.disp
 <!-- Set Admins -->
 <h3>Edit Admins</h3>
 <%@members.each do |member|%>
-    <p><%=member.user.name%> <input type='checkbox' name='admins[]' value='<%=member.id%>' <%=checked if member.admin==true%>></p>
+    <p><%=member.user.name%> <input type=<%=member.user==@user ? 'hidden' : 'checkbox'%> name='admins[]' value='<%=member.id%>' <%='checked' if member.admin==true%>></p>
 <%end%>
 
 <!-- Save Button -->
