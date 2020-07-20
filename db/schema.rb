@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_140622) do
+ActiveRecord::Schema.define(version: 2020_07_20_163029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 2020_07_17_140622) do
     t.boolean "public?", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "join_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
+    t.boolean "accepted", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "messages", id: :serial, force: :cascade do |t|

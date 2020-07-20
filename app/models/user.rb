@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
     has_many :group_users
     has_many :groups, through: :group_users
     has_many :messages
+    has_many :join_requests
 
     before_validation :lowercase_email_before_validation
 
