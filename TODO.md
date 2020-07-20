@@ -15,7 +15,7 @@ Updates:
 
 ------------------------------
 DONE 7/20:
-
+- Protect edit views from non-admins
 
 
 DONE 7/17:
