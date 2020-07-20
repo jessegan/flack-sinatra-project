@@ -1,6 +1,5 @@
 Major Features:
 - Group invites
-- Joining Groups + Join requests
 - Leaving groups
 - Flash messaging when creating/editing fails
 
@@ -13,12 +12,15 @@ Updates:
 - Add validation to group_users to always have at least one admin
 - Delete autofill in some forms
 - Creating a group creates a default general channel
+- Add view members button
 
 ------------------------------
 DONE 7/20:
 - Protect edit views from non-admins
 - Public and private groups
 - User join public group
+- User can request to join group
+- Group admin can accept join request
 
 
 DONE 7/17:
