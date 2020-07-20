@@ -23,6 +23,7 @@ class GroupController < ApplicationController
     get '/groups/list' do
         if logged_in?
             @public_groups = Group.all.select {|g| g.public?}.sort_by {|g| g.display_name}
+            @private_groups = Group.all.select {|g| !g.public?}.sort_by {|g| g.display_name}
 
             erb :'groups/list'
         else

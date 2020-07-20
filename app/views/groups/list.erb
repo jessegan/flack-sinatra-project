@@ -1,9 +1,8 @@
 <a href='/groups'>Back to groups</a>
 
-<h1>Public Groups</h1>
+<h1>Browse Groups</h1>
 
-<br>
-<h2></h2>
+<h2>Public Groups</h2>
 
 <%@public_groups.each do |group|%>
     <p>
@@ -11,3 +10,11 @@
     </P>
 <%end%>
 
+
+<h2>Private Groups</h2>
+
+<%@private_groups.each do |group|%>
+    <p>
+        <%=group.display_name%> | <%=group.num_members%>
+    </P>
+<%end%>
