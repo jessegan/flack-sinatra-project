@@ -84,6 +84,14 @@ class GroupController < ApplicationController
         redirect to '/groups'
     end
 
+    post '/groups/:slug/request' do
+        group = Group.find_by_slug(params[:slug])
+
+        JoinRequest.create(user:current_user,group:group)
+
+        redirect to '/groups/list'
+    end
+
     patch '/groups/:slug' do
         group = Group.find_by_slug(params[:slug])
 
