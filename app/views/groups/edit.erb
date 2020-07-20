@@ -8,7 +8,11 @@
 Name <input type='text' name='group[name]' value='<%=@group.name%>'>
 Display Name <input type='text' name='group[display_name]' value='<%=@group.display_name%>'>
 <br><br>
-Make group public <input type='checkbox' name=group[public?] value='true' <%='checked' if @group.public?%>>
+<%if @group.public?%>
+    Make group private <input type='checkbox' name=group[public?] value='false'>
+<%else%>
+    Make group public <input type='checkbox' name=group[public?] value='true'>
+<%end%>
 
 <br><br>
 <!-- Set Admins -->
