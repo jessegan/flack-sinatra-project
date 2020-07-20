@@ -1,6 +1,10 @@
 <a href='/groups/<%=@group.slug%>'>Back to channels</a>
 
 <h1>Edit Members</h1>
+
+<a href='/groups/<%=@group.slug%>/requests'><button>View Join Requests</button></a>
+
+
 <form method='POST' action='/groups/<%=@group.slug%>'>
 <input type='hidden' id='hidden' name='_method' value='PATCH'>
 <!-- List current members in a form to remove -->
@@ -16,12 +20,13 @@
     </p>
 <%end%>
 
-<!-- List all other members to add (only ones not already in group) -->
+<!-- List all other members to add (only ones not already in group) 
 <h3>Add Other Users</h3>
 <%@other_users.each do |user|%>
     <%=user.name%> <input type='checkbox' name='group[user_ids][]' value='<%=user.id%>'>
     <br>
 <%end%>
+-->
 
 <input type='submit' value='Save'>
 </form>
