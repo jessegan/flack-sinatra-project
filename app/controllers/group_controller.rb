@@ -52,11 +52,15 @@ class GroupController < ApplicationController
     end
 
     get '/groups/:slug/edit' do
-        @user = current_user
         @group = Group.find_by_slug(params[:slug])
-        @members = @group.group_users.sort_by {|m| m.user.name}
-
-        erb :'groups/edit'
+        if admin?(@group)
+            @user = current_user
+            @members = @group.group_users.sort_by {|m| m.user.name}
+        
+            erb :'groups/edit'
+        else
+            redirect "/groups/#{@group.slug}"
+        end
     end
 
     patch '/groups/:slug' do
