@@ -41,9 +41,14 @@ class GroupController < ApplicationController
 
     get '/groups/:slug/members' do
         @group = Group.find_by_slug(params[:slug])
-        @other_users = User.all.reject {|user| @group.users.include?(user)}
+        if admin?(@group)
+            @other_users = User.all.reject {|user| @group.users.include?(user)}
 
-        erb :'groups/members'
+            erb :'groups/members'
+        else
+            redirect "/groups/#{@group.slug}"
+        end
+
     end
 
     get '/groups/:slug/edit' do

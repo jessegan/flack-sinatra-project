@@ -25,6 +25,10 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
+
+    def admin?(group)
+      group.group_users.find_by(user: current_user).admin
+    end
   end
 
 end
