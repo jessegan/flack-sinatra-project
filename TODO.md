@@ -18,6 +18,7 @@ Updates:
 DONE 7/20:
 - Protect edit views from non-admins
 - Public and private groups
+- User join public group
 
 
 DONE 7/17:

@@ -6,8 +6,8 @@
 
 <%@public_groups.each do |group|%>
     <p>
-        <form method='POST' action='/groups/<%=group.slug%>/join'>
-            <%=group.display_name%> | <%=group.num_members%> members 
+        <%=group.display_name%> | <%=group.num_members%> members
+        <form method='POST' action='/groups/<%=group.slug%>/join'>  
             <input type='submit' value='Join'>
         </form>
     </P>
@@ -18,6 +18,9 @@
 
 <%@private_groups.each do |group|%>
     <p>
-        <%=group.display_name%> | <%=group.num_members%>
+        <%=group.display_name%> | <%=group.num_members%> members 
+        <form method='POST' action='/groups/<%=group.slug%>/request'>
+            <input type='submit' value='Request to Join'>
+        </form>
     </P>
 <%end%>
