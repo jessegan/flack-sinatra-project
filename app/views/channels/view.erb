@@ -2,8 +2,10 @@
 <h1><%=@group.display_name%> / #<%=@channel.name%></h1>
 
 <!-- Edit Channel Button -->
-<a href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>/edit'><button>Edit Channel</button></a>
-<br><br>
+<%if @is_admin%>
+    <a href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>/edit'><button>Edit Channel</button></a>
+    <br><br>
+<%end%>
 
 <h2></h2>
 
