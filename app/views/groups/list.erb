@@ -6,7 +6,10 @@
 
 <%@public_groups.each do |group|%>
     <p>
-        <%=group.display_name%> | <%=group.num_members%>
+        <form method='POST' action='/groups/<%=group.slug%>/join'>
+            <%=group.display_name%> | <%=group.num_members%> members 
+            <input type='submit' value='Join'>
+        </form>
     </P>
 <%end%>
 

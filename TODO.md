@@ -1,5 +1,6 @@
 Major Features:
-- Group invites and requests
+- Group invites
+- Joining Groups + Join requests
 - Leaving groups
 - Flash messaging when creating/editing fails
 

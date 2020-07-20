@@ -76,6 +76,14 @@ class GroupController < ApplicationController
         end
     end
 
+    post '/groups/:slug/join' do
+        group = Group.find_by_slug(params[:slug])
+        
+        group.users << current_user
+
+        redirect to '/groups'
+    end
+
     patch '/groups/:slug' do
         group = Group.find_by_slug(params[:slug])
 
