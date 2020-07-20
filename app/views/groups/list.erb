@@ -29,7 +29,8 @@
         <%if @requested_groups.include?(group)%>
             <br><br><button>Request Sent</button>
         <%else%>
-            <form method='POST' action='/groups/<%=group.slug%>/request'>
+            <form method='POST' action='/request'>
+                <input type='hidden' name='group_id' value='<%=group.id%>'>
                 <input type='submit' value='Request to Join'>
             </form>
         <%end%>

@@ -38,6 +38,14 @@ class UserController < ApplicationController
         end
     end
 
+    post '/request' do
+        group = Group.find(params[:group_id])
+
+        JoinRequest.create(user:current_user,group:group)
+
+        redirect to '/groups/list'
+    end
+
     post '/signup' do
         user = User.new(params)
         if user && user.save
