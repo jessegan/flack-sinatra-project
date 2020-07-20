@@ -13,6 +13,8 @@ Updates:
 - Delete autofill in some forms
 - Creating a group creates a default general channel
 - Add view members button
+- Reorganize controllers into request_controller
+- prevent group_users duplicates
 
 ------------------------------
 DONE 7/20:
