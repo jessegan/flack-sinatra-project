@@ -1,5 +1,4 @@
 Major Features:
-- Public/Private Groups and Channels
 - Group invites and requests
 - Leaving groups
 - Flash messaging when creating/editing fails
@@ -12,10 +11,12 @@ Updates:
 - Order groups and channels by name
 - Add validation to group_users to always have at least one admin
 - Delete autofill in some forms
+- Creating a group creates a default general channel
 
 ------------------------------
 DONE 7/20:
 - Protect edit views from non-admins
+- Public and private groups
 
 
 DONE 7/17:
