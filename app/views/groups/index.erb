@@ -6,8 +6,6 @@
 <a href='/groups/new'><button>+ Create Group</button></a>
 <br><br>
 
-<!-- Button to browse public groups -->
-
 <!-- List Groups for current user -->
 <%@user.groups.each do |g|%>
     <a href='/groups/<%=g.slug%>'>
@@ -17,7 +15,15 @@
     </a>
 <%end%>
 
+
+<!-- Button to browse public groups -->
 <br>
 <h2></h2>
+<a href='/groups/list'>Browse Public Groups</a>
+<br>
+
+
 <!-- Logout button -->
+<br>
+<h2></h2>
 <a href='/profile'>View Profile</a> | <a href='/logout'>Logout</a>
