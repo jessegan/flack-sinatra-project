@@ -29,6 +29,10 @@ class ApplicationController < Sinatra::Base
     def admin?(group)
       group.group_users.find_by(user: current_user).admin
     end
+
+    def member_of(group)
+      group.users.include?(current_user)
+    end
   end
 
 end
