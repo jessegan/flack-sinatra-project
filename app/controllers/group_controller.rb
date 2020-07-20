@@ -24,6 +24,7 @@ class GroupController < ApplicationController
         if logged_in?
             other_groups = Group.all.reject {|g| g.users.include?(current_user)}
 
+            @requested_groups = JoinRequest.where(user: current_user).map {|x| x.group}
             @public_groups = other_groups.select {|g| g.public?}.sort_by {|g| g.display_name}
             @private_groups = other_groups.select {|g| !g.public?}.sort_by {|g| g.display_name}
 
@@ -65,6 +66,17 @@ class GroupController < ApplicationController
         end
     end
 
+    get '/groups/:slug/requests' do
+        @group = Group.find_by_slug(params[:slug])
+        if admin?(@group)
+            @requests = @group.join_requests.where(accepted: false)
+        
+            erb :'groups/requests'
+        else
+            redirect "/groups/#{@group.slug}"
+        end
+    end
+
     post '/groups' do
         group = Group.new(params)
         if group.save
@@ -82,6 +94,16 @@ class GroupController < ApplicationController
         group.users << current_user
 
         redirect to '/groups'
+    end
+
+    post '/groups/:slug/requests' do
+        request = JoinRequest.find(params[:request_id])
+        group = Group.find_by_slug(params[:slug])
+
+        request.update(accepted: true)
+        group.users << request.user
+
+        redirect to "/groups/#{group.slug}/requests"
     end
 
     post '/groups/:slug/request' do

@@ -16,11 +16,22 @@
 
 <h2>Private Groups</h2>
 
+<h3>Groups Requested</h3>
+<%@requested_groups.each do |group|%>
+    <p><%=group.display_name%> | <%=group.num_members%> members</p>
+<%end%>
+
+<h3>Other Groups</h3>
+
 <%@private_groups.each do |group|%>
     <p>
-        <%=group.display_name%> | <%=group.num_members%> members 
-        <form method='POST' action='/groups/<%=group.slug%>/request'>
-            <input type='submit' value='Request to Join'>
-        </form>
+        <%=group.display_name%> | <%=group.num_members%> members
+        <%if @requested_groups.include?(group)%>
+            <br><br><button>Request Sent</button>
+        <%else%>
+            <form method='POST' action='/groups/<%=group.slug%>/request'>
+                <input type='submit' value='Request to Join'>
+            </form>
+        <%end%>
     </P>
 <%end%>
