@@ -20,14 +20,13 @@ class GroupController < ApplicationController
         end
     end
 
-    post '/groups' do
-        group = Group.new(params)
-        if group.save
-            GroupUser.create(group: group, user: current_user, admin: 1)
+    get '/groups/list' do
+        if logged_in?
+            @public_groups = Group.all.select {|g| g.public?}.sort_by {|g| g.display_name}
 
-            redirect to '/groups'
+            erb :'groups/list'
         else
-            redirect to '/groups/new'
+            redirect to '/login'
         end
     end
 
@@ -60,6 +59,17 @@ class GroupController < ApplicationController
             erb :'groups/edit'
         else
             redirect "/groups/#{@group.slug}"
+        end
+    end
+
+    post '/groups' do
+        group = Group.new(params)
+        if group.save
+            GroupUser.create(group: group, user: current_user, admin: 1)
+
+            redirect to '/groups'
+        else
+            redirect to '/groups/new'
         end
     end
 

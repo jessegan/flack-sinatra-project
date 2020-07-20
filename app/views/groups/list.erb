@@ -1,0 +1,13 @@
+<a href='/groups'>Back to groups</a>
+
+<h1>Public Groups</h1>
+
+<br>
+<h2></h2>
+
+<%@public_groups.each do |group|%>
+    <p>
+        <%=group.display_name%> | <%=group.num_members%>
+    </P>
+<%end%>
+
