@@ -24,7 +24,7 @@ class GroupController < ApplicationController
         if logged_in?
             other_groups = Group.all.reject {|g| g.users.include?(current_user)}
 
-            @requested_groups = Request.where(user: current_user,status: 'pending').map {|x| x.group}
+            @requested_groups = Request.where(user: current_user,request_type:'join',status: 'pending').map {|x| x.group}
             @public_groups = other_groups.select {|g| g.public?}.sort_by {|g| g.display_name}
             @private_groups = other_groups.select {|g| !g.public?}.sort_by {|g| g.display_name}
 
@@ -69,7 +69,7 @@ class GroupController < ApplicationController
     get '/groups/:slug/requests' do
         @group = Group.find_by_slug(params[:slug])
         if admin?(@group)
-            @requests = @group.requests.where(status: 'pending')
+            @requests = @group.requests.where(request_type: "join",status: 'pending')
         
             erb :'groups/requests'
         else
@@ -97,7 +97,7 @@ class GroupController < ApplicationController
     end
 
     post '/groups/:slug/requests' do
-        request = JoinRequest.find(params[:request_id])
+        request = Request.find(params[:request_id])
         group = Group.find_by_slug(params[:slug])
 
         if params[:action] == 'Accept'

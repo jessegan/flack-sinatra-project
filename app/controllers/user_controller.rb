@@ -41,7 +41,7 @@ class UserController < ApplicationController
     post '/request' do
         group = Group.find(params[:group_id])
 
-        Request.create(user:current_user,group:group)
+        Request.create(user:current_user,group:group,request_type:"join")
 
         redirect to '/groups/list'
     end
