@@ -5,7 +5,7 @@ class GroupController < ApplicationController
             redirect to '/login'
         else 
             @user = current_user
-            @groups = @user.groups
+            @groups = @user.groups.sort_by {|x| x.display_name}
 
             erb :'groups/index'
         end
@@ -38,7 +38,7 @@ class GroupController < ApplicationController
     get '/groups/:slug' do
         @group = Group.find_by_slug(params[:slug])
         @user = current_user
-        @channels = @group.channels
+        @channels = @group.channels.sort_by {|x| x.name}
         @is_admin = admin?(@group)
         erb :'groups/view'
     end
@@ -63,7 +63,7 @@ class GroupController < ApplicationController
     get '/groups/:slug/invite' do
         @group = Group.find_by_slug(params[:slug])
         if admin?(@group)
-            @other_users = User.all.reject {|user| @group.users.include?(user)}
+            @other_users = User.all.reject {|user| @group.users.include?(user)}.sort_by {|x| x.name}
             @invites_sent = @group.requests.where(request_type:'invite',status:'pending').map{|x|x.user}
 
             erb :'groups/invite'
