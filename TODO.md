@@ -15,6 +15,7 @@ Updates:
 - Add view members button
 - Reorganize controllers into request_controller
 - prevent group_users duplicates
+- Add message when lists are empty
 
 ------------------------------
 DONE 7/20:
