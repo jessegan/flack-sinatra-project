@@ -5,6 +5,7 @@ class GroupController < ApplicationController
             redirect to '/login'
         else 
             @user = current_user
+            @groups = @user.groups
 
             erb :'groups/index'
         end
