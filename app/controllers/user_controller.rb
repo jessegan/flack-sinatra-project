@@ -38,12 +38,35 @@ class UserController < ApplicationController
         end
     end
 
+    get '/invites' do
+        if logged_in?
+            @invites = Request.where(user:current_user,request_type:'invite',status:'pending')
+
+            erb :'users/invites'
+        else
+            redirect to "/login"
+        end
+    end
+
     post '/request' do
         group = Group.find(params[:group_id])
 
         Request.create(user:current_user,group:group,request_type:"join")
 
         redirect to '/groups/list'
+    end
+
+    post '/invites' do
+        invite = Request.find(params[:invite_id])
+
+        if params[:action] == 'Accept'
+            invite.update(status: 'accepted')
+            invite.group.users << invite.user
+        else
+            invite.update(status: 'declined')
+        end
+
+        redirect to "/invites"
     end
 
     post '/signup' do

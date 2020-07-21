@@ -16,6 +16,7 @@ Updates:
 - Reorganize controllers into request_controller
 - prevent group_users duplicates
 - Add message when lists are empty
+- change /groups to /home
 
 ------------------------------
 DONE 7/21:

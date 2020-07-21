@@ -1,0 +1,16 @@
+<a href='/groups'>Back to groups</a>
+
+<h1>Group Invites</h1>
+
+<%if @invites.empty?%>
+    <p>You have no invites.</p>
+<%else%>
+    <%@invites.each do |invite|%>
+        <%=invite.group.display_name%> has invited you to join
+        <form method='POST' action='/invites'>
+            <input type='hidden' name='invite_id' value='<%=invite.id%>'>
+            <input type='submit' name='action' value='Accept'>
+            <input type='submit' name='action' value='Decline'>
+        </form>
+    <%end%>
+<%end%>
