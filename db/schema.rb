@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_182853) do
+ActiveRecord::Schema.define(version: 2020_07_21_134028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,20 +40,20 @@ ActiveRecord::Schema.define(version: 2020_07_20_182853) do
     t.datetime "updated_at"
   end
 
-  create_table "join_requests", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "group_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "status", default: "pending"
-  end
-
   create_table "messages", id: :serial, force: :cascade do |t|
     t.integer "channel_id", null: false
     t.integer "user_id", null: false
     t.text "contents", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "status", default: "pending"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

@@ -1,4 +1,4 @@
-class JoinRequest < ActiveRecord::Base
+class Request < ActiveRecord::Base
     belongs_to :user
     belongs_to :group
 
