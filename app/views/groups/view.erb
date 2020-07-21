@@ -12,9 +12,13 @@
 <a href='/groups/<%=@group.slug%>/c/new'><button>+ Create Channel</button></a>
 <br><br>
 
-<%@group.channels.each do |channel|%>
-    <a href='/groups/<%=@group.slug%>/c/<%=channel.slug%>'><h4>#<%=channel.name%></h4></a>
-<%end%>
+<% if @channels.empty? %>
+    <h3>No Channels Created</h3>
+<% else %>
+    <%@channels.each do |channel|%>
+        <a href='/groups/<%=@group.slug%>/c/<%=channel.slug%>'><h4>#<%=channel.name%></h4></a>
+    <%end%>
+<% end %>
 
 <!-- Leave Group form -->
 <form id='leave-form' method='POST' action='/groups/<%=@group.slug%>/leave'>
