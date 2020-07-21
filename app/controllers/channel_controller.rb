@@ -19,7 +19,7 @@ class ChannelController < ApplicationController
         @group = Group.find_by_slug(params[:slug])
 
         if admin?(@group)
-            @channel = Channel.find_by_slug(params[:channel_slug])
+            @channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
             @user = current_user
 
             erb :'channels/edit'
@@ -31,7 +31,7 @@ class ChannelController < ApplicationController
 
     post '/groups/:slug/c/:channel_slug' do
         group = Group.find_by_slug(params[:slug])
-        channel = Channel.find_by_slug(params[:channel_slug])
+        channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
 
         Message.create(params[:message])
 
@@ -52,19 +52,19 @@ class ChannelController < ApplicationController
 
     patch '/groups/:slug/c/:channel_slug' do
         group = Group.find_by_slug(params[:slug])
-        channel = Channel.find_by_slug(params[:channel_slug])
+        channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
 
         if channel.update(params[:channel])
             redirect to "/groups/#{group.slug}/c/#{channel.slug}"
         else
-            channel = Channel.find_by_slug(params[:channel_slug])
+            channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
             redirect to "/groups/#{group.slug}/c/#{channel.slug}/edit"
         end        
     end
 
     delete '/groups/:slug/c/:channel_slug' do
         group = Group.find_by_slug(params[:slug])
-        channel = Channel.find_by_slug(params[:channel_slug])
+        channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
         channel.destroy
 
         redirect to "/groups/#{group.slug}"
