@@ -37,19 +37,25 @@ class GroupController < ApplicationController
     get '/groups/:slug' do
         @group = Group.find_by_slug(params[:slug])
         @user = current_user
-        @is_admin = @group.group_users.find_by(user: @user).admin
-
+        @is_admin = admin?(@group)
         erb :'groups/view'
     end
 
     get '/groups/:slug/members' do
         @group = Group.find_by_slug(params[:slug])
+        @members = @group.group_users.sort_by {|x| x.user.name}
+        @is_admin = admin?(@group)
+
+        erb :'groups/members'
+    end
+
+    get '/groups/:slug/members/edit' do
+        @group = Group.find_by_slug(params[:slug])
         if admin?(@group)
-            erb :'groups/members'
+            erb :'groups/edit_members'
         else
             redirect "/groups/#{@group.slug}"
         end
-
     end
 
     get '/groups/:slug/invite' do

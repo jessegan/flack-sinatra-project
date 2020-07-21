@@ -1,9 +1,8 @@
 <a href='/groups'>Back to groups</a>
 <h1><%=@group.display_name%></h1>
 
-
+<a href='/groups/<%=@group.slug%>/members'><button>View Members</button></a>
 <%if @is_admin%>
-    <a href='/groups/<%=@group.slug%>/members'><button>Edit Members</button></a>
     <a href='/groups/<%=@group.slug%>/edit'><button>Edit Group</button></a>
 <%end%>
 

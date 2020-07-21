@@ -1,0 +1,25 @@
+<a href='/groups/<%=@group.slug%>'>Back to channels</a>
+
+<h1>Edit Members</h1>
+
+<a href='/groups/<%=@group.slug%>/requests'><button>View Join Requests</button></a>
+<a href='/groups/<%=@group.slug%>/invite'><button>Invite New Members</button></a>
+
+
+<form method='POST' action='/groups/<%=@group.slug%>'>
+<input type='hidden' id='hidden' name='_method' value='PATCH'>
+<!-- List current members in a form to remove -->
+<h3>Current Members</h3>
+<%@group.group_users.each do |member|%>
+    <p>
+    <%=member.user.name%> 
+    <%if member.admin%>
+        (Admin)<input type='hidden' name='group[user_ids][]' value='<%=member.user.id%>'>
+    <%else%>
+        <input type='checkbox' name='group[user_ids][]' value='<%=member.user.id%>' checked>
+    <%end%>
+    </p>
+<%end%>
+
+<input type='submit' value='Save'>
+</form>
