@@ -1,0 +1,12 @@
+<a href='/groups/<%=@group.slug%>/members'>Back to edit members</a>
+
+<h1>Invite New Members</h1>
+
+<%@other_users.each do |user|%>
+    <%=user.name%>
+    <form method='POST' action='/groups/<%=@group.slug%>/invite'>
+        <input type='hidden' name='user_id' value='<%=user.id%>'>
+        <input type='submit' value='Invite'>
+    </form>
+    <br>
+<%end%>
