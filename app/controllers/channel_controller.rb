@@ -8,7 +8,7 @@ class ChannelController < ApplicationController
 
     get '/groups/:slug/c/:channel_slug' do
         @group = Group.find_by_slug(params[:slug])
-        @channel = Channel.find_by_slug(params[:channel_slug])
+        @channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
         @user = current_user
         @is_admin = admin?(@group)
 

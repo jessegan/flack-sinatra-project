@@ -1,25 +1,23 @@
 Major Features:
-- Leaving groups
 - Flash messaging when creating/editing fails
 
 Updates:
-- Add back buttons on each page
-- Add button to view public groups on group index page
-- Add form validations on every form page (login,signup,create/edit forms)
-- Protect views for Users without access or not logged in
-- Order groups and channels by name
-- Add validation to group_users to always have at least one admin
-- Delete autofill in some forms
-- Creating a group creates a default general channel
-- Add view members button
-- Reorganize controllers into request_controller
-- prevent group_users duplicates
-- Add message when lists are empty
-- change /groups to /home
+- 7 Add back buttons on each page
+- 8 Add form validations on every form page (login,signup,create/edit forms)
+- 6 Protect views for Users without access or not logged in
+- 4 Order groups and channels by name
+- 9 Add validation to group_users to always have at least one admin
+- 10 Delete autofill in some forms
+- 1 Creating a group creates a default general channel
+- 2 Add view members button
+- 11 Reorganize controllers into request_controller
+- 5 prevent group_users duplicates
+- 3 Add message when lists are empty
 
 ------------------------------
 DONE 7/21:
 - Group invites
+- Leaving groups
 
 
 DONE 7/20:

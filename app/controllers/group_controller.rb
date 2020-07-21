@@ -90,7 +90,8 @@ class GroupController < ApplicationController
     post '/groups' do
         group = Group.new(params)
         if group.save
-            GroupUser.create(group: group, user: current_user, admin: 1)
+            group.group_users.create(user: current_user, admin: 1)
+            group.channels.create(name:'general')
 
             redirect to '/groups'
         else
