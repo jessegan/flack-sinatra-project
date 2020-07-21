@@ -61,6 +61,7 @@ class UserController < ApplicationController
 
         if params[:action] == 'Accept'
             invite.update(status: 'accepted')
+
             invite.group.users << invite.user
         else
             invite.update(status: 'declined')

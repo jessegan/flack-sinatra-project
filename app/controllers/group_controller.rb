@@ -121,6 +121,7 @@ class GroupController < ApplicationController
 
         if params[:action] == 'Accept'
             request.update(status: 'accepted')
+
             group.users << request.user
         else
             request.update(status: 'declined')
