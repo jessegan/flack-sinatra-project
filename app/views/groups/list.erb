@@ -3,36 +3,46 @@
 <h1>Browse Groups</h1>
 
 <h2>Public Groups</h2>
-
-<%@public_groups.each do |group|%>
-    <p>
-        <%=group.display_name%> | <%=group.num_members%> members
-        <form method='POST' action='/groups/<%=group.slug%>/join'>  
-            <input type='submit' value='Join'>
-        </form>
-    </P>
-<%end%>
+<% if @public_groups.empty? %>
+    <p>No public groups available to you.</p>
+<% else %>
+    <%@public_groups.each do |group|%>
+        <p>
+            <%=group.display_name%> | <%=group.num_members%> members
+            <form method='POST' action='/groups/<%=group.slug%>/join'>  
+                <input type='submit' value='Join'>
+            </form>
+        </P>
+    <%end%>
+<% end %>
 
 
 <h2>Private Groups</h2>
 
 <h3>Groups Requested</h3>
-<%@requested_groups.each do |group|%>
-    <p><%=group.display_name%> | <%=group.num_members%> members</p>
-<%end%>
+<% if @requested_groups.empty? %>
+    <p>You haven't requested to join any groups</p>
+<% else %>
+    <%@requested_groups.each do |group|%>
+        <p><%=group.display_name%> | <%=group.num_members%> members</p>
+    <%end%>
+<% end %>
 
-<h3>Other Groups</h3>
-
-<%@private_groups.each do |group|%>
-    <p>
-        <%=group.display_name%> | <%=group.num_members%> members
-        <%if @requested_groups.include?(group)%>
-            <br><br><button>Request Sent</button>
-        <%else%>
-            <form method='POST' action='/request'>
-                <input type='hidden' name='group_id' value='<%=group.id%>'>
-                <input type='submit' value='Request to Join'>
-            </form>
-        <%end%>
-    </P>
-<%end%>
+<h3>-----</h3>
+<% if @private_groups.empty? %>
+    <p>There are no private groups available to you</p>
+<% else %>
+    <%@private_groups.each do |group|%>
+        <p>
+            <%=group.display_name%> | <%=group.num_members%> members
+            <%if @requested_groups.include?(group)%>
+                <br><br><button>Request Sent</button>
+            <%else%>
+                <form method='POST' action='/request'>
+                    <input type='hidden' name='group_id' value='<%=group.id%>'>
+                    <input type='submit' value='Request to Join'>
+                </form>
+            <%end%>
+        </P>
+    <%end%>
+<% end %>
