@@ -1,5 +1,4 @@
 Major Features:
-- Group invites
 - Leaving groups
 - Flash messaging when creating/editing fails
 
@@ -20,7 +19,7 @@ Updates:
 
 ------------------------------
 DONE 7/21:
-
+- Group invites
 
 
 DONE 7/20:
