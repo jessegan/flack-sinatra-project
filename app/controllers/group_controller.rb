@@ -56,6 +56,7 @@ class GroupController < ApplicationController
         @group = Group.find_by_slug(params[:slug])
         if admin?(@group)
             @other_users = User.all.reject {|user| @group.users.include?(user)}
+            @invites_sent = @group.requests.where(request_type:'invite',status:'pending').map{|x|x.user}
 
             erb :'groups/invite'
         else

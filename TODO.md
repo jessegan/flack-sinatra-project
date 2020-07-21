@@ -18,6 +18,10 @@ Updates:
 - Add message when lists are empty
 
 ------------------------------
+DONE 7/21:
+
+
+
 DONE 7/20:
 - Protect edit views from non-admins
 - Public and private groups
