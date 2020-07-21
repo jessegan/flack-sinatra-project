@@ -17,6 +17,9 @@
     <a href='/groups/<%=@group.slug%>/c/<%=channel.slug%>'><h4>#<%=channel.name%></h4></a>
 <%end%>
 
+<!-- Leave Group form -->
+<form id='leave-form' method='POST' action='/groups/<%=@group.slug%>/leave'>
+</form>
 <!-- Logout button -->
 <h2><br></h2>
-<a href='/logout'>Logout</a>
+<a href="javascript:{}" onclick="document.getElementById('leave-form').submit(); return false;">Leave Group</a> | <a href='/logout'>Logout</a>

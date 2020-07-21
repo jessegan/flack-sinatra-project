@@ -129,6 +129,14 @@ class GroupController < ApplicationController
         redirect to "/groups/#{group.slug}/invite"
     end
 
+    post '/groups/:slug/leave' do
+        group = Group.find_by_slug(params[:slug])
+
+        group.users.delete(current_user)
+
+        redirect to "/groups"
+    end
+
     patch '/groups/:slug' do
         group = Group.find_by_slug(params[:slug])
 
