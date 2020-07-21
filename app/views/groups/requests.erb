@@ -5,12 +5,16 @@
 <br><br>
 <h2></h2>
 
-<%@requests.each do |request|%>
-    
-    <%=request.user.name%>
-    <form method='POST' action='/groups/<%=@group.slug%>/requests'>
-        <input type='hidden' name='request_id' value='<%=request.id%>'>
-        <input type='submit' name='action' value='Accept'>
-        <input type='submit' name='action' value='Decline'>
-    </form>
-<%end%>
+<% if @requests.empty? %>
+    <h3>No Join Requests.</h3>
+<% else %>
+    <%@requests.each do |request|%>
+        
+        <%=request.user.name%>
+        <form method='POST' action='/groups/<%=@group.slug%>/requests'>
+            <input type='hidden' name='request_id' value='<%=request.id%>'>
+            <input type='submit' name='action' value='Accept'>
+            <input type='submit' name='action' value='Decline'>
+        </form>
+    <%end%>
+<% end %>
