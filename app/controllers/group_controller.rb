@@ -119,6 +119,15 @@ class GroupController < ApplicationController
         redirect to "/groups/#{group.slug}/requests"
     end
 
+    post '/groups/:slug/invite' do
+        group = Group.find_by_slug(params[:slug])
+        user = User.find(params[:user_id])
+
+        Request.create(user:user,group:group,request_type:'invite')
+
+        redirect to "/groups/#{group.slug}/invite"
+    end
+
     patch '/groups/:slug' do
         group = Group.find_by_slug(params[:slug])
 
