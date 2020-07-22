@@ -1,21 +1,74 @@
-<h1>Signup</h1>
+<div class='container'>    
+    <div class="row">
+    
+        <h1 class="col s12">Create An Account</h1>
 
-<!-- Sign up form -->
-<div>
-    <form method='POST' action='/signup'>
-        <input type='text' placeholder='Name' name='name'>
-        <br>
-        <input type='text' placeholder='Email' name='email'>
-        <br>
-        <input type='text' placeholder='Password' name='password'>
-        <br>
-        <input type='text' placeholder='Confirm Password' name='password_confirmation'>
-        <br>
-        <input type='submit' value='Signup'>
-    </form>
+        <!-- Login Form -->
+        <form class="col s12" method='POST' action='/signup' onSubmit = "return checkPassword(this)">
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field">
+                        <input placeholder="Full Name" type='text' name='name' class="validate" required>
+                        <span class="helper-text" data-error="Required" data-success=""></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field">
+                        <input placeholder="Email" type='email' name='email' class="validate" required>
+                        <span class="helper-text" data-error="Please enter a valid email" data-success=""></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s6">
+                    <div class="input-field">
+                        <input placeholder="Password" type='password' name='password' class="validate" required>
+                        <span class="helper-text" data-error="Required" data-success=""></span>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                        <input placeholder="Confirm Password" type='password' name='password_confirmation' class="validate" required>
+                        <span class="helper-text" data-error="Password did not match" data-success=""></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <button type='submit'>Create Account</button>
+                </div>
+            </div>
+        </form>
+        <!-- end login form -->
+
+        <!-- link to signup page -->
+        <div class="col s12">
+            <a href='/login'>Already have an account?</a>
+        </div>
+    </div>
 </div>
 
-<!-- Link to login -->
-<br>
-<h2></h2>
-<a href='/login'>Already have an account?</a>
+<script> 
+    // Function to check Whether both passwords 
+    // is same or not. 
+    function checkPassword(form) { 
+        password1 = form.password.value; 
+        password2 = form.password_confirmation.value; 
+
+        if (password1 != password2) {
+            form.password_confirmation.classList.add("invalid")
+            return false; 
+        } 
+
+        // If same return True. 
+        else{ 
+            form.password_confirmation.classList.add("valid") 
+            return true; 
+        } 
+    } 
+</script> 
