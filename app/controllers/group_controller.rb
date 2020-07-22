@@ -39,6 +39,7 @@ class GroupController < ApplicationController
         if @logged_in = logged_in?
             @group = Group.find_by_slug(params[:slug])
             @user = current_user
+            @groups = @user.groups.sort_by {|x| x.display_name}
             @channels = @group.channels.sort_by {|x| x.name}
             @is_admin = admin?(@group)
             erb :'groups/view'

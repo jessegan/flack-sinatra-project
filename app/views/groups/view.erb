@@ -1,28 +1,69 @@
-<a href='/groups'>Back to groups</a>
-<h1><%=@group.display_name%></h1>
+<!-- groups sidebar -->
+<ul id="slide-out" class="sidenav sidenav-fixed blue-grey lighten-4" style="top: 64px; width:225px">
 
-<a href='/groups/<%=@group.slug%>/members'><button>View Members</button></a>
-<%if @is_admin%>
-    <a href='/groups/<%=@group.slug%>/edit'><button>Edit Group</button></a>
-<%end%>
+    <!-- Button to create a new group -->
+    <li><a class="btn" href="/groups/new">Create Group</a></li>
+    <li><div class="divider"></div></li>
 
-<h2>Channels</h2>
+    <!-- groups list -->
+        <%@groups.each do |g|%>
+            <% if g==@group%>
+                <li class="active">
+            <% else %>
+                <li>
+            <% end %>
+                <a href='/groups/<%=g.slug%>'><%=g.display_name%></a>
+            </li>
+        <%end%>
+    <!-- end groups list -->
+  
 
-<!-- Button to create a new channel -->
-<a href='/groups/<%=@group.slug%>/c/new'><button>+ Create Channel</button></a>
-<br><br>
+    <!-- Button to browse public groups -->
+    <li><div class="divider"></div></li>
+    <li><a href="/groups/list">Browse Groups</a></li>
+    <li><a href="/invites">Group Invites
+        <%invite_count = @user.group_invites.count%>
+        <% if invite_count>0%>
+            <span class="badge white-text blue-grey"><%=invite_count%></span>
+        <% end %>
+    </a></li>
 
-<% if @channels.empty? %>
-    <h3>No Channels Created</h3>
-<% else %>
-    <%@channels.each do |channel|%>
-        <a href='/groups/<%=@group.slug%>/c/<%=channel.slug%>'><h4>#<%=channel.name%></h4></a>
+    <li><div class="divider"></div></li>
+    <li><a href='/profile'>View Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+</ul>
+<!-- end groups side nav bar -->
+
+<!-- channels side nav bar -->
+<ul id="slide-out" class="sidenav sidenav-fixed blue-grey lighten-5" style="top: 64px; width:200px; left: 225px;">
+
+    <li><a class="subheader"><%=@group.display_name%></a></li>
+    <li><a href='/groups/<%=@group.slug%>/members'>View Members</a></li>
+    <%if @is_admin%>
+        <li><a href='/groups/<%=@group.slug%>/edit'>Edit Group</a></li>
     <%end%>
-<% end %>
 
-<!-- Leave Group form -->
-<form id='leave-form' method='POST' action='/groups/<%=@group.slug%>/leave'>
-</form>
-<!-- Logout button -->
-<h2><br></h2>
-<a href="javascript:{}" onclick="document.getElementById('leave-form').submit(); return false;">Leave Group</a> | <a href='/logout'>Logout</a>
+    <li><div class="divider"></div></li>
+
+    <li><a href='/groups/<%=@group.slug%>/c/new'>+ New Channel</a></li>
+
+    <%@channels.each do |channel|%>
+        <li><a href='/groups/<%=@group.slug%>/c/<%=channel.slug%>'>#<%=channel.name%></a></li>
+    <%end%>
+
+
+    <li><div class="divider"></div></li>
+
+    <!-- Leave Group form -->
+    <form id='leave-form' method='POST' action='/groups/<%=@group.slug%>/leave'>
+    </form>
+
+    <li></l></lli><a class="red-text" href="javascript:{}" onclick="document.getElementById('leave-form').submit(); return false;">Leave Group</a></li>
+    
+</ul>
+<!-- end channels side nav bar -->
+
+
+<div id="main" class="container center" style="padding-left: 425px">
+    <h3>Choose a channel to see its messages</h3>
+</div>
