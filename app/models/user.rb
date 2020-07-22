@@ -11,6 +11,14 @@ class User < ActiveRecord::Base
     validates_presence_of :email, :password, :name
     validates_uniqueness_of :email
 
+    def group_invites
+        self.requests.where(status:'pending',request_type:'invite')
+    end
+
+    def group_requests
+        self.requests.where(status:'pending',request_type:'join')
+    end
+
     private
         def lowercase_email_before_validation
             self.email.downcase!
