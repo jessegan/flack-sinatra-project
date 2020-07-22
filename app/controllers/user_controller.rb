@@ -20,7 +20,7 @@ class UserController < ApplicationController
         if @logged_in = logged_in?
             @user = current_user
             @group_count = @user.groups.count
-            @most_active = Channel.find(@user.messages.group(:channel_id).count.max_by{|k,v|v}[0])
+            #@most_active = Channel.find(@user.messages.group(:channel_id).count.max_by{|k,v|v}[0])
 
             erb :'users/profile'
         else
@@ -40,7 +40,7 @@ class UserController < ApplicationController
 
     get '/invites' do
         if @logged_in = logged_in?
-            @invites = Request.where(user:current_user,request_type:'invite',status:'pending')
+            @invites = current_user.group_invites
 
             erb :'users/invites'
         else
