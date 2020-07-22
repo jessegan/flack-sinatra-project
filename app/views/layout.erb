@@ -7,23 +7,43 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
-    <title>Flack</title>
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title>Flack - Fake Slack</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
+
   <body>
-    <div class="wrapper">
+    <!-- nav bar -->
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/groups" class="brand-logo">Flack</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <%if @logged_in%>
+            <li><a href="/groups">Home</a></li>
+            <li><a href="/groups/list">Browse Groups</a></li>
+          <%else%>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Signup</a></li>
+          <%end%>
+        </ul>
+      </div>
+    </nav>
+    <!-- nav bar -->
 
-        <%= yield %>
+    <!-- Main Content -->
+    <%= yield %>
+    <!-- end Main Content -->
 
-      <footer class="branding">
-        <small>&copy; 2020 <strong>Fiscord</strong></small>
-      </footer>
-    </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <!--[if lt IE 7]>
       <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
       <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>

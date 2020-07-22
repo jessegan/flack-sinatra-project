@@ -1,28 +1,28 @@
 class GroupController < ApplicationController
 
     get '/groups' do
-        if !logged_in?
-            redirect to '/login'
-        else 
+        if @logged_in = logged_in?
             @user = current_user
             @groups = @user.groups.sort_by {|x| x.display_name}
 
             erb :'groups/index'
+        else 
+            redirect to '/login'
         end
     end
 
     get '/groups/new' do
-        if !logged_in?
-            redirect to '/login'
-        else
+        if @logged_in = logged_in?
             @user = current_user
 
-            erb :'groups/new'
+            erb :'groups/new'   
+        else
+            redirect to '/login'
         end
     end
 
     get '/groups/list' do
-        if logged_in?
+        if @logged_in = logged_in?
             other_groups = Group.all.reject {|g| g.users.include?(current_user)}
 
             @requested_groups = Request.where(user: current_user,request_type:'join',status: 'pending').map {|x| x.group}
@@ -36,62 +36,86 @@ class GroupController < ApplicationController
     end
 
     get '/groups/:slug' do
-        @group = Group.find_by_slug(params[:slug])
-        @user = current_user
-        @channels = @group.channels.sort_by {|x| x.name}
-        @is_admin = admin?(@group)
-        erb :'groups/view'
+        if @logged_in = logged_in?
+            @group = Group.find_by_slug(params[:slug])
+            @user = current_user
+            @channels = @group.channels.sort_by {|x| x.name}
+            @is_admin = admin?(@group)
+            erb :'groups/view'
+        else
+            redirect to '/login'
+        end
     end
 
     get '/groups/:slug/members' do
-        @group = Group.find_by_slug(params[:slug])
-        @members = @group.group_users.sort_by {|x| x.user.name}
-        @is_admin = admin?(@group)
-
-        erb :'groups/members'
+        if @logged_in = logged_in?
+            @group = Group.find_by_slug(params[:slug])
+            @members = @group.group_users.sort_by {|x| x.user.name}
+            @is_admin = admin?(@group)
+    
+            erb :'groups/members'
+        else
+            redirect to '/login'
+        end
     end
 
     get '/groups/:slug/members/edit' do
-        @group = Group.find_by_slug(params[:slug])
-        if admin?(@group)
-            erb :'groups/edit_members'
+        if @logged_in = logged_in?
+            @group = Group.find_by_slug(params[:slug])
+            if admin?(@group)
+                erb :'groups/edit_members'
+            else
+                redirect "/groups/#{@group.slug}"
+            end
         else
-            redirect "/groups/#{@group.slug}"
+            redirect to '/login'
         end
     end
 
     get '/groups/:slug/invite' do
-        @group = Group.find_by_slug(params[:slug])
-        if admin?(@group)
-            @other_users = User.all.reject {|user| @group.users.include?(user)}.sort_by {|x| x.name}
-            @invites_sent = @group.requests.where(request_type:'invite',status:'pending').map{|x|x.user}
-
-            erb :'groups/invite'
+        if @logged_in = logged_in?
+            @group = Group.find_by_slug(params[:slug])
+            if admin?(@group)
+                @other_users = User.all.reject {|user| @group.users.include?(user)}.sort_by {|x| x.name}
+                @invites_sent = @group.requests.where(request_type:'invite',status:'pending').map{|x|x.user}
+    
+                erb :'groups/invite'
+            else
+                redirect "/groups/#{@group.slug}"
+            end
         else
-            redirect "/groups/#{@group.slug}"
+            redirect to '/login'
         end
     end
 
     get '/groups/:slug/edit' do
-        @group = Group.find_by_slug(params[:slug])
-        if admin?(@group)
-            @user = current_user
-            @members = @group.group_users.sort_by {|m| m.user.name}
-        
-            erb :'groups/edit'
+        if @logged_in = logged_in?
+            @group = Group.find_by_slug(params[:slug])
+            if admin?(@group)
+                @user = current_user
+                @members = @group.group_users.sort_by {|m| m.user.name}
+            
+                erb :'groups/edit'
+            else
+                redirect "/groups/#{@group.slug}"
+            end
         else
-            redirect "/groups/#{@group.slug}"
+            redirect to '/login'
         end
     end
 
     get '/groups/:slug/requests' do
-        @group = Group.find_by_slug(params[:slug])
-        if admin?(@group)
-            @requests = @group.requests.where(request_type: "join",status: 'pending')
-        
-            erb :'groups/requests'
+        if @logged_in = logged_in?
+            @group = Group.find_by_slug(params[:slug])
+            if admin?(@group)
+                @requests = @group.requests.where(request_type: "join",status: 'pending')
+            
+                erb :'groups/requests'
+            else
+                redirect "/groups/#{@group.slug}"
+            end
         else
-            redirect "/groups/#{@group.slug}"
+            redirect to '/login'
         end
     end
 
