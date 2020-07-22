@@ -1,33 +1,36 @@
-<h1>Welcome, <%=@user.name%></h1>
+<!-- groups sidebar -->
+<ul id="slide-out" class="sidenav sidenav-fixed" style="top: 64px; width:225px">
 
-<h2></h2>
+    <!-- Button to create a new group -->
+    <li><a class="btn" href="/groups/new">Create Group</a></li>
 
-<!-- Button to create a new group -->
-<a href='/groups/new'><button>+ Create Group</button></a>
-<br><br>
+    
+        <%@groups.each do |g|%>
+            <li>
+            <a href='/groups/<%=g.slug%>'>
+            
+              <%=g.display_name%>
+            
+            </a>
+            </li>
+        <%end%>
+  
 
-<!-- List Groups for current user -->
-<%if @groups.empty?%>
-    <h3>You are not in any groups.</h3>
-<%else%>
-    <%@groups.each do |g|%>
-        <a href='/groups/<%=g.slug%>'>
-        <div>
-            <h3><%=g.display_name%></h3>
-        </div>
-        </a>
-    <%end%>
-<%end%>
+    <!-- Button to browse public groups -->
+    <li><div class="divider"></div></li>
+    <li><a href="/groups/list">Browse Groups</a></li>
+    <li><a href="/invites">Group Invites
+        <%invite_count = @user.group_invites.count%>
+        <% if invite_count>0%>
+            <span class="badge white-text blue-grey"><%=invite_count%></span>
+        <% end %>
+    </a></li>
 
+    <li><div class="divider"></div></li>
+    <li><a href='/profile'>View Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+</ul>
 
-<!-- Button to browse public groups -->
-<br>
-<h2></h2>
-<a href='/groups/list'>Browse Groups</a> | <a href='/invites'>Group Invites</a>
-<br>
-
-
-<!-- Logout button -->
-<br>
-<h2></h2>
-<a href='/profile'>View Profile</a> | <a href='/logout'>Logout</a>
+<div id="main" class="container center" style="padding-left: 225px">
+    <h3>Choose a group to see its channels</h3>
+</div>
