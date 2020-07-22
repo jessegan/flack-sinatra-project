@@ -15,6 +15,8 @@ class ChannelController < ApplicationController
             @group = Group.find_by_slug(params[:slug])
             @channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
             @user = current_user
+            @groups = @user.groups.sort_by {|x| x.display_name}
+            @channels = @group.channels
             @is_admin = admin?(@group)
     
             erb :'channels/view'
