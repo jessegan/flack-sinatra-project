@@ -4,11 +4,9 @@ Major Features:
 Updates:
 - 7 Add back buttons on each page
 - 8 Add form validations on every form page (login,signup,create/edit forms)
-- 6 Protect views for Users without access or not logged in
 - 9 Add validation to group_users to always have at least one admin
 - 10 Delete autofill in some forms
 - 11 Reorganize controllers into request_controller
-- 5 prevent group_users duplicates
 - Add logout buttons to every page
 - Deal with invites+Requests
 
