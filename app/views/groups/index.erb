@@ -7,11 +7,7 @@
     
         <%@groups.each do |g|%>
             <li>
-            <a href='/groups/<%=g.slug%>'>
-            
-              <%=g.display_name%>
-            
-            </a>
+            <a href='/groups/<%=g.slug%>'><%=g.display_name%></a>
             </li>
         <%end%>
   
