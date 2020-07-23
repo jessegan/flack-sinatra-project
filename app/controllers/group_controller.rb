@@ -67,6 +67,7 @@ class GroupController < ApplicationController
         if @logged_in = logged_in?
             @group = Group.find_by_slug(params[:slug])
             if admin?(@group)
+                @members = @group.group_users.sort_by {|x| x.user.name}
                 erb :'groups/edit_members'
             else
                 redirect "/groups/#{@group.slug}"
@@ -186,6 +187,16 @@ class GroupController < ApplicationController
         end
 
         redirect to "/groups/#{group.slug}"
+    end
+
+    patch '/groups/:slug/members' do
+        group = Group.find_by_slug(params[:slug])
+
+        params[:user_ids].each do |id|
+            group.users.delete(User.find(id))
+        end
+
+        redirect to "/groups/#{group.slug}/members"
     end
 
     delete '/groups/:slug' do
