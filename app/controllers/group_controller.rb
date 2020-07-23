@@ -23,11 +23,14 @@ class GroupController < ApplicationController
 
     get '/groups/list' do
         if @logged_in = logged_in?
-            other_groups = Group.all.reject {|g| g.users.include?(current_user)}
+            groups = Group.all
 
+            @user = current_user
             @requested_groups = Request.where(user: current_user,request_type:'join',status: 'pending').map {|x| x.group}
-            @public_groups = other_groups.select {|g| g.public?}.sort_by {|g| g.display_name}
-            @private_groups = other_groups.select {|g| !g.public?}.sort_by {|g| g.display_name}
+            @user_groups = @user.groups
+
+            @public_groups = groups.select {|g| g.public?}.sort_by {|g| g.display_name}
+            @private_groups = groups.select {|g| !g.public?}.sort_by {|g| g.display_name}
 
             erb :'groups/list'
         else

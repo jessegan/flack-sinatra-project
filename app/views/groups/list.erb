@@ -1,48 +1,63 @@
-<a href='/groups'>Back to groups</a>
+<a href="/groups"><i class="material-icons left">arrow_back</i>Back to home</a>
 
-<h1>Browse Groups</h1>
+<div class="container">
+    <!-- public groups -->
+    <div class="row">
+        <div class="col s12">
+            <ul class="collection with-header">
+                <li class="collection-header"><h4>Public Groups</h4></li>
+                    <% if @public_groups.empty? %>
+                        <li class="collection-item">No public groups.</li>
+                    <% else %>
+                        <%@public_groups.each do |group|%>
+                            <form id='join-<%=group.id%>' method='POST' action='/groups/<%=group.slug%>/join'>  
+                                <input type='submit' hidden>
+                            </form>
 
-<h2>Public Groups</h2>
-<% if @public_groups.empty? %>
-    <p>No public groups available to you.</p>
-<% else %>
-    <%@public_groups.each do |group|%>
-        <p>
-            <%=group.display_name%> | <%=group.num_members%> members
-            <form method='POST' action='/groups/<%=group.slug%>/join'>  
-                <input type='submit' value='Join'>
-            </form>
-        </P>
-    <%end%>
-<% end %>
+                            <li class="collection-item"><div><%=group.display_name%> | <%=group.num_members%> members 
+                            <% if @user_groups.include?(group) %>
+                                <a class="secondary-content grey-text">Already Joined</a>
+                            <% else %>
+                                <a class="secondary-content" href="javascript:{}" onclick="document.getElementById('join-<%=group.id%>').submit(); return false;">Join Group</a>
+                            <% end %>                            
+                            </div></li>
+
+                        <%end%>
+                    <% end %> 
+            </ul>
+        </div>
+    </div>
+    <!-- end public groups -->
 
 
-<h2>Private Groups</h2>
+    <!-- Private groups -->
+    <div class="col s12">
+            <ul class="collection with-header">
+                <li class="collection-header"><h4>Private Groups</h4></li>
+                    <% if @private_groups.empty? %>
+                        <li class="collection-item">No private groups.</li>
+                    <% else %>
+                        <%@private_groups.each do |group|%>
+                            <form id='request-<%=group.id%>' method='POST' action='/request'>  
+                                <input type='hidden' name='group_id' value='<%=group.id%>'>
+                                <input type='submit' hidden>
+                            </form>
 
-<h3>Groups Requested</h3>
-<% if @requested_groups.empty? %>
-    <p>You haven't requested to join any groups</p>
-<% else %>
-    <%@requested_groups.each do |group|%>
-        <p><%=group.display_name%> | <%=group.num_members%> members</p>
-    <%end%>
-<% end %>
+                            <li class="collection-item"><div><%=group.display_name%> | <%=group.num_members%> members 
+                            <% if @user_groups.include?(group) %>
+                                <a class="secondary-content grey-text">Already Joined</a>
+                            <% elsif @requested_groups.include?(group) %>
+                                <a class="secondary-content orange-text">Request Sent</a>
+                            <% else %>
+                                <a class="secondary-content" href="javascript:{}" onclick="document.getElementById('request-<%=group.id%>').submit(); return false;">Request to Join</a>
+                            <% end %>                            
+                            </div></li>
 
-<h3>-----</h3>
-<% if @private_groups.empty? %>
-    <p>There are no private groups available to you</p>
-<% else %>
-    <%@private_groups.each do |group|%>
-        <p>
-            <%=group.display_name%> | <%=group.num_members%> members
-            <%if @requested_groups.include?(group)%>
-                <br><br><button>Request Sent</button>
-            <%else%>
-                <form method='POST' action='/request'>
-                    <input type='hidden' name='group_id' value='<%=group.id%>'>
-                    <input type='submit' value='Request to Join'>
-                </form>
-            <%end%>
-        </P>
-    <%end%>
-<% end %>
+                        <%end%>
+                    <% end %> 
+            </ul>
+        </div>
+    </div>
+    <!-- end private groups -->
+
+</div>
