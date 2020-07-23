@@ -1,34 +1,98 @@
-<a href='/groups/<%=@group.slug%>'>Back to channels</a>
+<a href='/groups/<%=@group.slug%>'><i class="material-icons left">arrow_back</i>Back to group</a>
 
-<h1>Edit Group Details</h1>
+<div class="container">
 
-<form method='POST' action='/groups/<%=@group.slug%>'>
-<input type='hidden' id='hidden' name='_method' value='PATCH'>
+    <div class="row">
+        <h1 class="col s12">Edit Group Details</h1>
+    </div>
 
-Name <input type='text' name='group[name]' value='<%=@group.name%>'>
-Display Name <input type='text' name='group[display_name]' value='<%=@group.display_name%>'>
-<br><br>
-<%if @group.public?%>
-    Make group private <input type='checkbox' name=group[public?] value='false'>
-<%else%>
-    Make group public <input type='checkbox' name=group[public?] value='true'>
-<%end%>
+    <div class="row">
+        <form class="col s12" method='POST' action='/groups/<%=@group.slug%>'>
+            <input type='hidden' id='hidden' name='_method' value='PATCH'>
 
-<br><br>
-<!-- Set Admins -->
-<h3>Edit Admins</h3>
-<%@members.each do |member|%>
-    <p><%=member.user.name%> <input type=<%=member.user==@user ? 'hidden' : 'checkbox'%> name='admins[]' value='<%=member.id%>' <%='checked' if member.admin==true%>></p>
-<%end%>
+            <!-- edit name inputs -->
+            <div class="row">
+                <div class="col s6">
+                    <div class="input-field">
+                        <input id="group-name" type='text' name='group[name]' value='<%=@group.name%>' class="validate" autocomplete="off" required>
+                        <label for="group-name">Group Name</label>
+                    </div>
+                </div>
 
-<!-- Save Button -->
-<input type='submit' value='Save'>
-</form>
-<br>
+                <div class="col s6">
+                    <div class="input-field">
+                        <input id="display-name" type='text' name='group[display_name]' value='<%=@group.display_name%>' class="validate" autocomplete="off" required>
+                        <label for="display-name">Display Name</label>
+                    </div>
+                </div>
+            </div>
+            <!-- end edit name inputs -->
 
-<!-- Delete Group Button -->
-<h2></h2>
-<form method='POST' action='/groups/<%=@group.slug%>'>
-    <input type='hidden' id='hidden' name='_method' value='DELETE'>
-    <input type='submit' value='Delete Group'>
-</form>
+            <!-- visibility settings -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="switch">
+                        <%if @group.public?%>
+                            <label>
+                                Keep Public
+                                <input type='checkbox' name='group[public?]' value='false'>
+                                <span class="lever"></span>
+                                Make Private
+                            </label>
+                        <% else %>
+                            <label>
+                                Keep Private
+                                <input type='checkbox' name='group[public?]' value='true'>
+                                <span class="lever"></span>
+                                Make Public
+                            </label>            
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- end visibility settings -->
+
+            <!-- edit admins list -->
+            <div class="row">
+                <div class="col s12">
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h3>Edit Admins</h3></li>
+
+                        <%@members.each do |member|%>
+                            <li class="collection-item"><div>
+                            <strong><%=member.user.name%></strong> 
+
+                            <% if member.user==@user %>
+                                <input type="hidden" name='admins[]' value='<%=member.id%>' <%='checked' if member.admin==true%>>
+                                <a class="secondary-content grey-text">(You)</a>
+                            <% else %>
+                                <label class="secondary-content">
+                                    <input class="filled-in" type='checkbox' name='admins[]' value='<%=member.id%>' <%='checked' if member.admin==true%>>
+                                    <span></span>
+                                </label>
+                            <% end %>
+
+                            </div></li>
+                        <%end%>
+                    </ul>
+                </div>
+            </div>
+            <!-- end edit admins list -->
+
+            <div class="row">
+                <div class="col s12">
+                <button class="btn blue-grey" type="submit">Save</button>
+            </div>
+        
+        </form>
+    </div>
+
+    <div class="row">
+        <form class="col s12" method='POST' action='/groups/<%=@group.slug%>'>
+            <input type='hidden' id='hidden' name='_method' value='DELETE'>
+            <button class="btn red" type='submit'>Delete Group</button>
+        </form>
+    </div>
+
+</div>
