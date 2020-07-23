@@ -1,3 +1,4 @@
+
 <!-- groups sidebar -->
 <ul id="slide-out" class="sidenav sidenav-fixed blue-grey lighten-4" style="top: 64px; width:225px">
 
@@ -67,21 +68,31 @@
 </ul>
 <!-- end channels side nav bar -->
 
+<!-- channel content -->
+<div class="" style="margin-left: 425px; height: 100%;">
 
-<!-- Edit Channel Button -->
-<div class="" style="margin-left: 425px; padding:0px 25px;">
-
-    <%if @is_admin%>
-        <a href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>/edit'><button>Edit Channel</button></a>
-        <br><br>
-    <%end%>
-
-    <div id="messages" style="height: 500px; display:flex; flex-direction:column-reverse; overflow: scroll;">
-        <%@channel.messages.each do |m|%>
-            <h4><%=m.user.name%></h4>
-            <p><%=m.contents%></p>
-            <br>
+    <div class="row blue-grey lighten-5">
+        <div class="col s10">
+            <h4>#<%=@channel.name%></h4>
+        </div>
+        <%if @is_admin%>
+            <div class="col s2">
+                <div class="valign-wrapper">
+                    <a class="btn-small" href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>/edit'>Edit Channel</a>
+                </div>
+            </div>
         <%end%>
+    </div>
+
+    <div id="messages" style="height: 75vh; padding: 0px 10px; display:flex; overflow: hidden;">
+        <ul class="collection" style="width:100%; display: flex; flex-direction:column-reverse; overflow: scroll;">
+        <%@channel.messages.reverse.each do |m|%>
+            <li class="collection-item">
+                <span class="name"><%=m.user.name%></span>
+                <p><%=m.contents%></p>
+            </li>
+        <%end%>
+        </ul>
     </div>
 
     <div class="row" style="padding-top: 5px">
@@ -99,6 +110,9 @@
         </form>
     </div>
 </div>
+<!-- end channel content -->
+
+
 
 <script>
     function handleEnter(e){
