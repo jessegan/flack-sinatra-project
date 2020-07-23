@@ -1,12 +1,48 @@
-<a href='/groups/<%=@group.slug%>'>Back to channels</a>
-<h1>View Members</h1>
+<a href='/groups/<%=@group.slug%>'><i class="material-icons left">arrow_back</i>Back to group</a>
 
-<%if @is_admin%>
-    <a href='/groups/<%=@group.slug%>/members/edit'><button>Edit Members</button></a>
-<%end%>
+<div class="container">
 
-<%@members.each do |member|%>
-    <p>
-    <%=member.user.name%><%=' (Admin)' if member.admin%>
-    </p>
-<%end%>
+    <!-- members list -->
+    <div class="row">
+        <div class="col s12">
+            <ul class="collection with-header">
+                <li class="collection-header"><h4>Members</h4></li>
+                    
+                <%@members.each do |member|%>
+
+                    <li class="collection-item"><div><strong><%=member.user.name%></strong>
+                    
+                    <% if member.admin %>
+                        <a class="secondary-content grey-text">Admin</a>
+                    <% end %>       
+                                     
+                    </div></li>
+
+                <%end%>
+                   
+            </ul>
+        </div>
+    </div>
+    <!-- end members list -->
+
+    <!-- admin options -->
+    <%if @is_admin%>
+        <div class="row">
+            <div class="col s4 center">
+                <a class="btn blue-grey" href='/groups/<%=@group.slug%>/members/edit'>Edit Members</a>
+            </div>
+
+            <div class="col s4 center">
+                <a class="btn blue-grey" href='/groups/<%=@group.slug%>/invite'>Invite New Members</a>
+            </div>
+
+            <div class="col s4 center">
+                <a class="btn blue-grey" href='/groups/<%=@group.slug%>/requests'>View Join Requests</a>
+            </div>
+        </div>
+    <%end%>
+    <!-- end admin options -->
+</div>
+
+
+
