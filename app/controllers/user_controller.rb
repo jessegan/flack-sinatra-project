@@ -20,7 +20,7 @@ class UserController < ApplicationController
         if @logged_in = logged_in?
             @user = current_user
             @group_count = @user.groups.count
-            #@most_active = Channel.find(@user.messages.group(:channel_id).count.max_by{|k,v|v}[0])
+            @messages_count = @user.messages.count
 
             erb :'users/profile'
         else
