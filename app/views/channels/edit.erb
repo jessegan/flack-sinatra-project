@@ -1,22 +1,38 @@
-<a href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>Back to #<%=@channel.name%></a>
-<h1>Edit #<%=@channel.name%></h1>
+<a href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'><i class="material-icons left">arrow_back</i>Back to #<%=@channel.name%></a>
 
-<h2></h2>
+<div class="container">
+    <div class="row">
+        <h1 class="col s12">Edit #<%=@channel.name%></h1>
+    </div>
 
-<!-- Edit Channel Name -->
-<form method='POST' action='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>
-<input type='hidden' id='hidden' name='_method' value='PATCH'>
+    <div class="row">
+        <form class="col s12" method='POST' action='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>
+            <input type='hidden' id='hidden' name='_method' value='PATCH'>
 
-<input type='text' name='channel[name]' value='<%=@channel.name%>'>
+            <div class="row">
+                <div class="col s6">
+                    <div class="input-field">
+                        <input id="channel-name" type='text' name='channel[name]' value='<%=@channel.name%>' class="validate" required>
+                        <label for="channel-name">Channel Name</label>
+                    </div>
+                </div>
+            </div>
 
-<input type='submit' value='Save'>
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn blue-grey" type="submit">Save</button>
+                </div>
+            </div>
 
-</form>
-<br>
+        </form>
+    </div>
 
-<!-- Delete Channel -->
-<h2></h2>
-<form method='POST' action='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>
-    <input type='hidden' id='hidden' name='_method' value='DELETE'>
-    <input type='submit' value='Delete Channel'>
-</form>
+    <div class="row">
+        <form class="col s12" method='POST' action='/groups/<%=@group.slug%>/c/<%=@channel.slug%>'>
+            <input type='hidden' id='hidden' name='_method' value='DELETE'>
+
+            <button class="btn red" type='submit'>Delete Channel</button>
+        </form>
+    </div>
+
+</div>
