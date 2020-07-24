@@ -14,7 +14,7 @@
                                 <input type='submit' hidden>
                             </form>
 
-                            <li class="collection-item"><div><%=group.display_name%> | <%=group.num_members%> members 
+                            <li class="collection-item"><div><strong><%=group.display_name%></strong> | <%=group.num_members%> members 
                             <% if @user_groups.include?(group) %>
                                 <a class="secondary-content grey-text">Already Joined</a>
                             <% else %>
@@ -43,7 +43,7 @@
                                 <input type='submit' hidden>
                             </form>
 
-                            <li class="collection-item"><div><%=group.display_name%> | <%=group.num_members%> members 
+                            <li class="collection-item"><div><strong><%=group.display_name%></strong> | <%=group.num_members%> members 
                             <% if @user_groups.include?(group) %>
                                 <a class="secondary-content grey-text">Already Joined</a>
                             <% elsif @requested_groups.include?(group) %>
