@@ -8,14 +8,15 @@
             <div class="row">
                 <div class="col s6">
                     <div class="input-field">
-                        <input id="group-name" type='text' name='name' class="validate" autocomplete="off" required>
+                        <input id="group-name" type='text' name='name' pattern="[a-z0-9-]+" class="validate" autocomplete="off" onkeydown="return alphanumericOnly(event);" required>
                         <label for="group-name">Group Name</label>
+                        <span class="helper-text">Lowercase Letters [a-z], Numbers [0-9], and Dashes [-] only.</span>
                     </div>
                 </div>
 
                 <div class="col s6">
                     <div class="input-field">
-                        <input id="display-name" type='text' name='display_name' class="validate" autocomplete="off" required>
+                        <input id="display-name" type='text' name='display_name' pattern="[a-zA-Z0-9- ]+" class="validate" autocomplete="off" required>
                         <label for="display-name">Display Name</label>
                     </div>
                 </div>
@@ -42,3 +43,12 @@
         </form>
     </div>
 </div>
+
+
+<script>
+    function alphanumericOnly(e){
+        var key = e.which;
+
+        return ((key>=48 && key<=57) || (key>=65 && key<=90) || (key==8) || (key==32) || (key==189));  
+    };
+</script>
