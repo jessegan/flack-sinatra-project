@@ -72,13 +72,13 @@
 <div class="" style="margin-left: 425px; height: 100%;">
 
     <div class="row blue-grey lighten-5">
-        <div class="col s10">
+        <div class="col s11">
             <h4>#<%=@channel.name%></h4>
         </div>
         <%if @is_admin%>
-            <div class="col s2">
-                <div class="valign-wrapper">
-                    <a class="btn-small" href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>/edit'>Edit Channel</a>
+            <div class="col s1">
+                <div class=>
+                    <a class="btn-small" href='/groups/<%=@group.slug%>/c/<%=@channel.slug%>/edit'>Edit</a>
                 </div>
             </div>
         <%end%>
