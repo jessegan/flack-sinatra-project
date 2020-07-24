@@ -1,12 +1,33 @@
-<h1>Create a new Channel</h1>
+<a href="/groups/<%=@group.slug%>"><i class="material-icons left">arrow_back</i>Back to group</a>
 
-<h2></h2>
+<div class="container">
+    <div class="row">
+        <h1 class="col s12">Create a Channel</h1>
+    </div>
 
-<form method='POST' action='/groups/<%=@group.slug%>/c'>
-<input type='hidden' name='channel[group_id]' value='<%=@group.id%>'>
+    <div class="row">
+        <form class="col s12" method='POST' action='/groups/<%=@group.slug%>/c'>
+            <input type='hidden' name='channel[group_id]' value='<%=@group.id%>'>
 
-<input type='text' name='channel[name]' placeholder='Channel Name'>
-<br><br>
-<input type='submit' value='Create Channel'>
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field">
+                        <input id="channel-name" type='text' name='channel[name]' class="validate" required>
+                        <label for="channel-name">Channel Name</label>
+                    </div>
+                </div>
+            </div>
 
-</form>
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn blue-grey" type="submit">Create Channel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
