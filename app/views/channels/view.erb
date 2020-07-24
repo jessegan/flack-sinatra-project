@@ -30,7 +30,7 @@
 
     <li><div class="divider"></div></li>
     <li><a href='/profile'>View Profile</a></li>
-    <li><a href="/logout">Logout</a></li>
+    <li><a class="red-text" href="/logout">Logout</a></li>
 </ul>
 <!-- end groups side nav bar -->
 
@@ -86,12 +86,12 @@
 
     <div id="messages" style="height: 75vh; padding: 0px 10px; display:flex; overflow: hidden;">
         <ul class="collection" style="width:100%; display: flex; flex-direction:column-reverse; overflow: scroll;">
-        <%@channel.messages.reverse.each do |m|%>
-            <li class="collection-item">
-                <span class="name"><%=m.user.name%></span>
-                <p><%=m.contents%></p>
-            </li>
-        <%end%>
+            <%@channel.messages.reverse.each do |m|%>
+                <li class="collection-item">
+                    <span class="name"><%=m.user.name%></span>
+                    <p><%=m.contents%></p>
+                </li>
+            <%end%>
         </ul>
     </div>
 
