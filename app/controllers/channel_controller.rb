@@ -59,6 +59,7 @@ class ChannelController < ApplicationController
         if channel.save
             redirect to "/groups/#{group.slug}"
         else
+            flash[:error] = "Channel name already in use."
             redirect to "/groups/#{group.slug}/c/new"
         end
 

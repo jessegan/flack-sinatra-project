@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+    use Rack::Flash
 
     get '/login' do
         if @logged_in = logged_in?
@@ -48,6 +49,7 @@ class UserController < ApplicationController
         end
     end
 
+
     post '/request' do
         group = Group.find(params[:group_id])
 
@@ -76,6 +78,7 @@ class UserController < ApplicationController
             session[:user_id] = user.id
             redirect to '/groups'
         else
+            flash[:error] = "There is already an account with this email."
             redirect to '/signup'
         end
     end
@@ -87,6 +90,7 @@ class UserController < ApplicationController
 
             redirect to '/groups'
         else 
+            flash[:error] = "Email and password did not match."
             redirect to '/login'
         end
     end
@@ -96,6 +100,8 @@ class UserController < ApplicationController
         if user.update(params[:user])
             redirect to '/profile'
         else 
+            flash[:error] = "Wrong password."
+
             redirect to '/profile/edit'
         end
     end

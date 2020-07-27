@@ -132,6 +132,8 @@ class GroupController < ApplicationController
 
             redirect to '/groups'
         else
+            flash[:error] = "Group Name already in use."
+
             redirect to '/groups/new'
         end
     end

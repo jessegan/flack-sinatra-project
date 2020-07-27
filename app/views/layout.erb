@@ -37,6 +37,14 @@
     </div>
     <!-- nav bar -->
 
+    <% if flash[:error]%>
+      <div class="row grey lighten-3 red-text">
+          <div class="col s12">
+              <%= flash[:error] %>
+          </div>
+      </div>
+    <% end %>
+
     <!-- Main Content -->
 
     <%= yield %>
