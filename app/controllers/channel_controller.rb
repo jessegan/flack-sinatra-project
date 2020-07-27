@@ -3,8 +3,11 @@ class ChannelController < ApplicationController
     get '/groups/:slug/c/new' do
         if @logged_in = logged_in?
             @group = Group.find_by_slug(params[:slug])
-
-            erb :'channels/new'
+            if member_of(@group)
+                erb :'channels/new'
+            else
+                redirect to '/groups'
+            end
         else
             redirect to "/login"
         end
@@ -13,14 +16,19 @@ class ChannelController < ApplicationController
     get '/groups/:slug/c/:channel_slug' do
         if @logged_in = logged_in?
             @group = Group.find_by_slug(params[:slug])
-            @channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
+            if member_of(@group)
+                @channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
             
-            @user = current_user
-            @groups = @user.groups.sort_by {|x| x.display_name}
-            @channels = @group.channels.sort_by {|x| x.name}
-            @is_admin = admin?(@group)
-    
-            erb :'channels/view'
+                @user = current_user
+                @groups = @user.groups.sort_by {|x| x.display_name}
+                @channels = @group.channels.sort_by {|x| x.name}
+                @is_admin = admin?(@group)
+        
+                erb :'channels/view'
+            else
+                redirect to '/groups'
+            end
+
         else
             redirect to "/login"
         end
@@ -29,15 +37,19 @@ class ChannelController < ApplicationController
     get '/groups/:slug/c/:channel_slug/edit' do
         if @logged_in = logged_in?
             @group = Group.find_by_slug(params[:slug])
-
-            if admin?(@group)
-                @channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
-                @user = current_user
-    
-                erb :'channels/edit'
+            if member_of(@group)
+                if admin?(@group)
+                    @channel = Channel.find_by_slug(params[:slug],params[:channel_slug])
+                    @user = current_user
+        
+                    erb :'channels/edit'
+                else
+                    redirect "/groups/#{params[:slug]}/c/#{params[:channel_slug]}"
+                end
             else
-                redirect "/groups/#{params[:slug]}/c/#{params[:channel_slug]}"
+                redirect to '/groups'
             end
+
         else
             redirect to "/login"
         end

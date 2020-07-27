@@ -97,7 +97,7 @@ class UserController < ApplicationController
 
     patch '/profile' do
         user = current_user
-        if user.update(params[:user])
+        if user.authenticate(params[:user][:password]) && user.update(params[:user])
             redirect to '/profile'
         else 
             flash[:error] = "Wrong password."

@@ -88,7 +88,7 @@
         <ul class="collection" style="width:100%; display: flex; flex-direction:column-reverse; overflow: scroll;">
             <%@channel.messages.reverse.each do |m|%>
                 <li class="collection-item">
-                    <span class="name"><%=m.user.name%></span>
+                    <span class="name"><strong><%=m.user.name%></strong></span>
                     <p><%=m.contents%></p>
                 </li>
             <%end%>
