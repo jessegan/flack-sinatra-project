@@ -10,7 +10,7 @@
                 <%else%>
                     <%@requests.each do |request|%>
                         <li class="collection-item"><div>
-                        <strong><%=request.group.display_name%></strong> wants to join
+                        <strong><%=request.user.name%></strong> wants to join
                         <form style="margin-top: 5px;" method='POST' action='/groups/<%=@group.slug%>/requests'>
                             <input type='hidden' name='request_id' value='<%=request.id%>'>
                             <button class="btn" type='submit' name='action' value='Accept'>Accept</button>
